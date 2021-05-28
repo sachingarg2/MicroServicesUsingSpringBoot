@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -17,13 +19,16 @@ import java.util.Random;
 
 @SpringBootApplication
 @EnableSwagger2
-public class MicroserviceApplication {
+public class MicroserviceApplication extends SpringBootServletInitializer {
 	private static Logger _logger = LoggerFactory.getLogger(MicroserviceApplication.class);
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		SpringApplication.run(MicroserviceApplication.class, args);
 
 		//StoredProcedure.createStoredProcedure();
 
+	}
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
+		return application.sources(MicroserviceApplication.class);
 	}
 
 	@Bean
